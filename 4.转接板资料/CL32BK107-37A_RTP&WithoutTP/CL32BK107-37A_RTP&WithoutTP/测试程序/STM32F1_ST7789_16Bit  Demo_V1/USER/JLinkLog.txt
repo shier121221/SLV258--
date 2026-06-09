@@ -1,0 +1,137 @@
+T5F8C 011:828.198   SEGGER J-Link V7.98c Log File
+T5F8C 011:828.281   DLL Compiled: Aug  7 2024 15:37:06
+T5F8C 011:828.309   Logging started @ 2026-06-09 03:49
+T5F8C 011:828.318   Process: D:\keil5\UV4\UV4.exe
+T5F8C 011:828.326 - 10.125ms
+T5F8C 011:828.334 JLINK_SetWarnOutHandler(...)
+T5F8C 011:828.341 - 0.006ms
+T5F8C 011:828.348 JLINK_OpenEx(...)
+T5F8C 011:830.263   Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+T5F8C 011:830.774   Firmware: J-Link ARM-OB STM32 compiled Aug 22 2012 19:52:04
+T5F8C 011:832.004   Hardware: V7.00
+T5F8C 011:832.019   S/N: 20090928
+T5F8C 011:832.028   OEM: SEGGER
+T5F8C 011:832.038   Feature(s): RDI,FlashDL,FlashBP,JFlash,GDBFull
+T5F8C 011:832.434   Bootloader: (Could not read)
+T5F8C 011:832.969   TELNET listener socket opened on port 19021
+T5F8C 011:836.250   WEBSRV WEBSRV_Init(): Starting webserver thread(s)
+T5F8C 011:836.418   WEBSRV Webserver running on local port 19080
+T5F8C 011:836.675   Looking for J-Link GUI Server exe at: D:\keil5\ARM\Segger\JLinkGUIServer.exe
+T5F8C 011:836.831   Looking for J-Link GUI Server exe at: D:\Program Files\SEGGER\JLink\JLinkGUIServer.exe
+T5F8C 011:836.919   Forking J-Link GUI Server: D:\Program Files\SEGGER\JLink\JLinkGUIServer.exe
+T5F8C 011:845.522   J-Link GUI Server info: "J-Link GUI server V7.82 "
+T5F8C 011:845.816   J-Link GUI Server: Connection breakdown.
+T5F8C 011:845.930 - 17.582ms returns "O.K."
+T5F8C 011:845.960 JLINK_GetEmuCaps()
+T5F8C 011:845.970 - 0.010ms returns 0x88EA5833
+T5F8C 011:845.981 JLINK_TIF_GetAvailable(...)
+T5F8C 011:846.134 - 0.153ms
+T5F8C 011:846.155 JLINK_SetErrorOutHandler(...)
+T5F8C 011:846.165 - 0.009ms
+T5F8C 011:846.436 JLINK_ExecCommand("ProjectFile = "E:\YQ Project\SLV258-存贮式数字毫秒计项目\转接板资料\CL32BK107-37A_RTP&WithoutTP\CL32BK107-37A_RTP&WithoutTP\测试程序\STM32F1_ST7789_16Bit  Demo_V1\USER\JLinkSettings.ini"", ...). 
+T5F8C 011:849.585 - 3.149ms returns 0x00
+T5F8C 011:849.616 JLINK_ExecCommand("Device = STM32F103C8", ...). 
+T5F8C 011:849.898   Device "STM32F103C8" selected.
+T5F8C 011:850.418 - 0.792ms returns 0x00
+T5F8C 011:850.434 JLINK_ExecCommand("DisableConnectionTimeout", ...). 
+T5F8C 011:850.444   ERROR: Unknown command
+T5F8C 011:850.453 - 0.010ms returns 0x01
+T5F8C 011:850.461 JLINK_GetHardwareVersion()
+T5F8C 011:850.470 - 0.008ms returns 70000
+T5F8C 011:850.477 JLINK_GetDLLVersion()
+T5F8C 011:850.483 - 0.006ms returns 79803
+T5F8C 011:850.490 JLINK_GetOEMString(...)
+T5F8C 011:850.498 JLINK_GetFirmwareString(...)
+T5F8C 011:850.506 - 0.008ms
+T5F8C 011:850.521 JLINK_GetDLLVersion()
+T5F8C 011:850.528 - 0.007ms returns 79803
+T5F8C 011:850.535 JLINK_GetCompileDateTime()
+T5F8C 011:850.542 - 0.006ms
+T5F8C 011:850.550 JLINK_GetFirmwareString(...)
+T5F8C 011:850.556 - 0.006ms
+T5F8C 011:850.563 JLINK_GetHardwareVersion()
+T5F8C 011:850.570 - 0.006ms returns 70000
+T5F8C 011:850.578 JLINK_GetSN()
+T5F8C 011:850.583 - 0.006ms returns 20090928
+T5F8C 011:850.591 JLINK_GetOEMString(...)
+T5F8C 011:850.601 JLINK_TIF_Select(JLINKARM_TIF_SWD)
+T5F8C 011:850.925 - 0.324ms returns 0x00
+T5F8C 011:850.940 JLINK_HasError()
+T5F8C 011:850.949 JLINK_SetSpeed(5000)
+T5F8C 011:851.027 - 0.077ms
+T5F8C 011:851.454 JLINK_HasError()
+T5F8C 011:851.470 JLINK_SetResetType(JLINKARM_RESET_TYPE_NORMAL)
+T5F8C 011:851.478 - 0.007ms returns JLINKARM_RESET_TYPE_NORMAL
+T5F8C 011:851.486 JLINK_Reset()
+T5F8C 011:851.622   InitTarget() start
+T5F8C 011:851.634    J-Link Script File: Executing InitTarget()
+T5F8C 011:851.755   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 012:354.522   DAP initialized successfully.
+T5F8C 012:355.462   Can not attach to CPU. Trying connect under reset.
+T5F8C 012:406.017   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 012:812.524   Error: Failed to initialized DAP.
+T5F8C 012:812.552   Connecting to CPU via connect under reset failed.
+T5F8C 012:863.546   InitTarget() end - Took 1.01s
+T5F8C 012:863.578   Connect failed. Resetting via Reset pin and trying again.
+T5F8C 012:925.294   InitTarget() start
+T5F8C 012:925.323    J-Link Script File: Executing InitTarget()
+T5F8C 012:925.534   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 013:427.642   DAP initialized successfully.
+T5F8C 013:428.541   Can not attach to CPU. Trying connect under reset.
+T5F8C 013:478.990   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 013:982.426   DAP initialized successfully.
+T5F8C 013:983.402   Connecting to CPU via connect under reset failed.
+T5F8C 014:034.355   InitTarget() end - Took 1.10s
+T5F8C 014:034.386 - 2182.899ms
+T5F8C 014:034.406 JLINK_GetId()
+T5F8C 014:034.558   InitTarget() start
+T5F8C 014:034.570    J-Link Script File: Executing InitTarget()
+T5F8C 014:034.683   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 014:243.306   Error: Failed to initialized DAP.
+T5F8C 014:243.334   Can not attach to CPU. Trying connect under reset.
+T5F8C 014:294.278   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 014:797.141   DAP initialized successfully.
+T5F8C 014:798.050   Connecting to CPU via connect under reset failed.
+T5F8C 014:848.670   InitTarget() end - Took 814ms
+T5F8C 014:848.698   Connect failed. Resetting via Reset pin and trying again.
+T5F8C 014:909.278   InitTarget() start
+T5F8C 014:909.314    J-Link Script File: Executing InitTarget()
+T5F8C 014:909.488   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 015:411.845   DAP initialized successfully.
+T5F8C 015:412.830   Can not attach to CPU. Trying connect under reset.
+T5F8C 015:463.467   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 015:966.342   DAP initialized successfully.
+T5F8C 015:967.320   Connecting to CPU via connect under reset failed.
+T5F8C 016:018.203   InitTarget() end - Took 1.10s
+T5F8C 016:018.232 - 1983.825ms returns 0x00000000
+T5F8C 016:018.253 JLINK_GetId()
+T5F8C 016:018.408   InitTarget() start
+T5F8C 016:018.426    J-Link Script File: Executing InitTarget()
+T5F8C 016:018.608   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 016:521.003   DAP initialized successfully.
+T5F8C 016:521.962   Can not attach to CPU. Trying connect under reset.
+T5F8C 016:572.659   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 017:074.016   DAP initialized successfully.
+T5F8C 017:074.988   Connecting to CPU via connect under reset failed.
+T5F8C 017:125.236   InitTarget() end - Took 1.10s
+T5F8C 017:125.268   Connect failed. Resetting via Reset pin and trying again.
+T5F8C 017:186.516   InitTarget() start
+T5F8C 017:186.544    J-Link Script File: Executing InitTarget()
+T5F8C 017:186.704   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 017:689.212   DAP initialized successfully.
+T5F8C 017:690.112   Can not attach to CPU. Trying connect under reset.
+T5F8C 017:740.580   SWD selected. Executing JTAG -> SWD switching sequence.
+T5F8C 018:243.818   DAP initialized successfully.
+T5F8C 018:244.804   Connecting to CPU via connect under reset failed.
+T5F8C 018:295.258   InitTarget() end - Took 1.10s
+T5F8C 018:295.286 - 2277.032ms returns 0x00000000
+T5F8C 018:300.068 JLINK_GetFirmwareString(...)
+T5F8C 018:300.092 - 0.022ms
+T1F1C 019:799.868 Looking for J-Link GUI Server exe at: D:\keil5\ARM\Segger\JLinkGUIServer.exe
+T1F1C 019:800.052 Looking for J-Link GUI Server exe at: D:\Program Files\SEGGER\JLink\JLinkGUIServer.exe
+T1F1C 019:800.146 Forking J-Link GUI Server: D:\Program Files\SEGGER\JLink\JLinkGUIServer.exe
+T1F1C 019:840.132 J-Link GUI Server info: "J-Link GUI server V7.82 "
+T5F8C 021:072.292 JLINK_Close()
+T5F8C 021:080.632 - 8.338ms
+T5F8C 021:080.666   
+T5F8C 021:080.672   Closed
