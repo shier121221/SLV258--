@@ -3,6 +3,10 @@
 #include "lcd.h"
 #include "touch.h"
 #include "test code.h"
+#include "ui_main.h"
+#include "ui_timing_menu.h"
+
+#define RTP_RAW_TEST 0
 
 // LCD data bus (16-bit parallel):
 // DB0~DB6 = PA0~PA6
@@ -15,13 +19,17 @@
 //
 // Pulse test:
 // PA7 = 10ms pulse output
-// PB0, PB1, PB15 = digital input
+// PB0, PB1, PA15 = digital input
 
 // PA7: trigger pulse output (to external device, 10ms HIGH)
-// PB0, PB1, PB15: photogate inputs (NPN: no object=HIGH, object=LOW)
+// PB0, PB1, PA15: photogate inputs (NPN: no object=HIGH, object=LOW)
 static void pulse_io_init(void)
 {
-    RCC->APB2ENR |= (1<<2)|(1<<3);
+    RCC->APB2ENR |= (1<<0)|(1<<2)|(1<<3);
+
+    // PA15 defaults to JTAG. Disable JTAG and keep SWD so PA15 can be GPIO.
+    AFIO->MAPR &= ~(7u << 24);
+    AFIO->MAPR |=  (2u << 24);
 
     // PA7 output push-pull, idle LOW
     GPIOA->CRL &= ~(0xFu << 28);
@@ -32,43 +40,107 @@ static void pulse_io_init(void)
     GPIOB->CRL &= ~(0xFFu << 0);
     GPIOB->CRL |=  (0x88u << 0);
     GPIOB->ODR |=  (1<<0)|(1<<1);
-    // PB15 already input pull-up from touch init
+
+    // PA15 input pull-up
+    GPIOA->CRH &= ~(0xFu << 28);
+    GPIOA->CRH |=  (0x8u << 28);
+    GPIOA->ODR |=  (1<<15);
 }
 
-static void pulse_test(void)
+static void wait_touch_release(void)
 {
-    u8 pb0, pb1, pb15;
+    do {
+        tp_dev.scan(0);
+        delay_ms(20);
+    } while (tp_dev.sta & TP_PRES_DOWN);
+}
+
+static void rtp_gpio_init(void)
+{
+    RCC->APB2ENR |= (1<<0)|(1<<3);
+
+    // PB11=TCLK, PB12=TCS, PB13=TSDI output; PB14=TSDO, PB15=TPEN input pull-up.
+    GPIOB->CRH = (GPIOB->CRH & 0x00000FFFu) | 0x88333000u;
+    GPIOB->ODR |= (1<<11)|(1<<12)|(1<<13)|(1<<14)|(1<<15);
+}
+
+static void rtp_map_raw_to_screen(u16 rx, u16 ry, u16 *sx, u16 *sy)
+{
+    u16 x;
+    u16 y;
+
+    if (USE_LCM_DIR == 0) {
+        x = rx;
+        y = ry;
+    } else if (USE_LCM_DIR == 1) {
+        x = 4095 - rx;
+        y = 4095 - ry;
+    } else if (USE_LCM_DIR == 2) {
+        x = ry;
+        y = 4095 - rx;
+    } else {
+        x = 4095 - ry;
+        y = 4095 - rx;
+    }
+
+    *sx = (u16)(((u32)x * (lcddev.width - 1)) / 4095);
+    *sy = (u16)(((u32)y * (lcddev.height - 1)) / 4095);
+}
+
+static void rtp_raw_test(void)
+{
+    u16 rx = 0;
+    u16 ry = 0;
+    u16 sx;
+    u16 sy;
+    u8 ok;
+    u16 last_sx = 0xFFFF;
+    u16 last_sy = 0xFFFF;
+
+    rtp_gpio_init();
 
     LCD_Clear(WHITE);
     POINT_COLOR = BLACK;
-    LCD_ShowString(10, 10, 220, 16, 16, (u8*)"PA7: 10ms pulse every 500ms");
-    LCD_ShowString(10, 30, 220, 16, 16, (u8*)"Photogate: LOW=blocked");
+    BACK_COLOR = WHITE;
+    LCD_ShowString(8, 8, 160, 16, 16, (u8*)"RTP RAW TEST");
+    LCD_ShowString(8, 28, 64, 16, 16, (u8*)"PEN:");
+    LCD_ShowString(110, 28, 32, 16, 16, (u8*)"X:");
+    LCD_ShowString(220, 28, 32, 16, 16, (u8*)"Y:");
 
-    while(1)
-    {
-        // send 10ms trigger pulse on PA7
-        GPIOA->BSRR = (1<<7);
-        delay_ms(10);
-        GPIOA->BRR  = (1<<7);
+    while (1) {
+        LCD_Fill(56, 28, 319, 44, WHITE);
+        LCD_ShowNum(56, 28, TPEN ? 1 : 0, 1, 16);
 
-        // read photogate states
-        pb0  = (GPIOB->IDR >> 0)  & 1;
-        pb1  = (GPIOB->IDR >> 1)  & 1;
-        pb15 = (GPIOB->IDR >> 15) & 1;
+        if (TPEN == 0) {
+            ok = TP_Read_XY2(&rx, &ry);
+            if (ok) {
+                LCD_ShowNum(134, 28, rx, 4, 16);
+                LCD_ShowNum(244, 28, ry, 4, 16);
+                rtp_map_raw_to_screen(rx, ry, &sx, &sy);
+                if (last_sx != 0xFFFF && last_sy != 0xFFFF) {
+                    gui_fill_circle(last_sx, last_sy, 4, WHITE);
+                }
+                gui_fill_circle(sx, sy, 4, RED);
+                last_sx = sx;
+                last_sy = sy;
+            } else {
+                LCD_ShowString(134, 28, 48, 16, 16, (u8*)"ERR");
+                LCD_ShowString(244, 28, 48, 16, 16, (u8*)"ERR");
+            }
+        } else {
+            LCD_ShowString(134, 28, 48, 16, 16, (u8*)"----");
+            LCD_ShowString(244, 28, 48, 16, 16, (u8*)"----");
+        }
 
-        POINT_COLOR = pb0  ? BLACK : RED;
-        LCD_ShowString(10, 80,  200, 16, 16, (u8*)(pb0  ? "PB0 : clear  " : "PB0 : BLOCKED"));
-        POINT_COLOR = pb1  ? BLACK : RED;
-        LCD_ShowString(10, 110, 200, 16, 16, (u8*)(pb1  ? "PB1 : clear  " : "PB1 : BLOCKED"));
-        POINT_COLOR = pb15 ? BLACK : RED;
-        LCD_ShowString(10, 140, 200, 16, 16, (u8*)(pb15 ? "PB15: clear  " : "PB15: BLOCKED"));
-
-        delay_ms(490); // total loop ~500ms
+        delay_ms(80);
     }
 }
 
+
 int main(void)
 {
+    u8 page = 0;
+
     Stm32_Clock_Init(9);
     delay_init(72);
 
@@ -78,15 +150,42 @@ int main(void)
     LCD_Clear(WHITE);
     LCD_LED = 1;
 
+#if RTP_RAW_TEST
+    rtp_raw_test();
+#endif
+
+    tp_dev.init();
+
     pulse_io_init();
 
-    main_test("IC:ST7789V");
-    Color_Test();
-    Read_Test();
-    FillRec_Test();
-    English_Font_test();
-    Chinese_Font_test();
-    Rotate_Test();
+    UI_Main_Draw();
 
-    pulse_test();
+    while(1) {
+        if (page == 0) {
+            u8 act = UI_Main_Scan();
+            if (act == CARD_TIMING) {
+                page = 1;
+                wait_touch_release();
+                UI_TimingMenu_SetMeasuring(0);
+                UI_TimingMenu_Draw();
+            }
+            else if (act == CARD_MECHANIC) { /* TODO: mechanics screen   */ }
+            else if (act == CARD_SIGNAL)   { /* TODO: signal screen      */ }
+            else if (act == CARD_SETTINGS) { /* TODO: settings screen    */ }
+            else if ((act & 0xF0) == 0x10) {
+                u8 btn = act & 0x0F;
+                if (btn == BTN_SWITCH) { /* TODO: switch display mode    */ }
+            }
+        } else if (page == 1) {
+            u8 act = UI_TimingMenu_Scan();
+            if (act == TIMING_ACT_BACK) {
+                page = 0;
+                UI_Main_Draw();
+            } else if (act == TIMING_ACT_OK) {
+                /* TODO: jump to timing operation page, UI_TimingMenu_GetSelected() gives mode. */
+            } else if (act == TIMING_ACT_SWITCH) {
+                /* TODO: switch display mode */
+            }
+        }
+    }
 }

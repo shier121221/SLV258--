@@ -340,7 +340,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F10X_MD</Define>
               <Undefine></Undefine>
-              <IncludePath>..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\EXTI;..\HARDWARE\WDG;..\HARDWARE\TIMER;..\HARDWARE\OLED;..\HARDWARE\LCD;..\USMART;..\HARDWARE\RTC;..\HARDWARE\WKUP;..\HARDWARE\ADC;..\HARDWARE\DAC;..\HARDWARE\DMA;..\HARDWARE\SPI;..\HARDWARE\FLASH;..\HARDWARE\TOUCH;..\HARDWARE\LCD;..\HARDWARE\W25QX;..\HARDWARE\TEST</IncludePath>
+              <IncludePath>..\SYSTEM\delay;..\SYSTEM\sys;..\SYSTEM\usart;..\HARDWARE\LED;..\HARDWARE\KEY;..\HARDWARE\EXTI;..\HARDWARE\WDG;..\HARDWARE\TIMER;..\HARDWARE\OLED;..\HARDWARE\LCD;..\USMART;..\HARDWARE\RTC;..\HARDWARE\WKUP;..\HARDWARE\ADC;..\HARDWARE\DAC;..\HARDWARE\DMA;..\HARDWARE\SPI;..\HARDWARE\FLASH;..\HARDWARE\TOUCH;..\HARDWARE\LCD;..\HARDWARE\TEST;..\HARDWARE\UI</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -440,11 +440,6 @@
               <FilePath>..\HARDWARE\TOUCH\ctiic.c</FilePath>
             </File>
             <File>
-              <FileName>w25qx.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\W25QX\w25qx.c</FilePath>
-            </File>
-            <File>
               <FileName>touch.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\TOUCH\touch.c</FilePath>
@@ -453,6 +448,16 @@
               <FileName>test code.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\TEST\test code.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_main.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_main.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_timing_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_timing_menu.c</FilePath>
             </File>
           </Files>
         </Group>
@@ -475,5 +480,14 @@
     <components/>
     <files/>
   </RTE>
+
+  <LayerInfo>
+    <Layers>
+      <Layer>
+        <LayName>test</LayName>
+        <LayPrjMark>1</LayPrjMark>
+      </Layer>
+    </Layers>
+  </LayerInfo>
 
 </Project>

@@ -4,7 +4,6 @@
 #include "lcd.h"   
 #include "touch.h"  
 #include "pic.h"
-#include "w25qx.h"
 #include "test code.h"
 
 u16 ColorTab[5]={RED,GREEN,BLUE,YELLOW,BRED};//定义颜色数组
