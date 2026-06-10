@@ -16,18 +16,14 @@
 #define LABEL_X      34
 
 #define TIMING_LIST_AREA_Y 36
-#define TIMING_BTNBAR_Y    180
+#define TIMING_BTNBAR_Y    200
 
-#define BTN_Y        184
-#define BTN_W        62
-#define BTN_H        52
-#define BTN_GAP      3
-#define BTN_R        6
+#define BTN_Y        204
+#define BTN_H        32
+#define BTN_R        13
 
-#define UI_BTN_PRESS 0xC618
-#define UI_BTN_GRAY  0xDEFB
-
-static const u16 btn_x[5] = {0, 65, 130, 195, 258};
+static const u16 btn_x[5] = {4, 64, 124, 184, 244};
+static const u16 btn_w[5] = {54, 54, 54, 54, 72};
 static u8 selected_item = TIMING_ITEM_S1;
 static u8 timing_measuring = 0;
 
@@ -54,6 +50,12 @@ static void fill_round_rect(u16 x, u16 y, u16 w, u16 h, u8 r, u16 color)
     gui_fill_circle(x + w - r - 1, y + r, r, color);
     gui_fill_circle(x + r, y + h - r - 1, r, color);
     gui_fill_circle(x + w - r - 1, y + h - r - 1, r, color);
+}
+
+static void draw_panel(u16 x, u16 y, u16 w, u16 h, u8 r, u16 color)
+{
+    fill_round_rect(x + 2, y + 2, w, h, r, UI_SHADOW);
+    fill_round_rect(x, y, w, h, r, color);
 }
 
 static void draw_dot(u16 x, u16 y, u8 checked)
@@ -96,20 +98,23 @@ static void draw_one_item(u8 id)
 static void draw_one_btn(u8 id, u16 bg)
 {
     u16 x = btn_x[id];
+    u16 w = btn_w[id];
     u16 label_w = (id == BTN_OK) ? 24 : 32;
 
-    fill_round_rect(x, BTN_Y, BTN_W, BTN_H, BTN_R, bg);
+    if (id == BTN_OK)
+        fill_round_rect(x, BTN_Y, w, BTN_H, BTN_R, UI_ORANGE);
+    else
+        draw_panel(x, BTN_Y, w, BTN_H, BTN_R, bg);
 
-    BACK_COLOR = bg;
+    BACK_COLOR = (id == BTN_OK) ? UI_ORANGE : bg;
     if (id == BTN_CLEAR) POINT_COLOR = UI_RED_TEXT;
-    else if (id == BTN_OK) POINT_COLOR = UI_ORANGE_TEXT;
-    else if (id == BTN_STOP) POINT_COLOR = UI_SUBTEXT;
+    else if (id == BTN_OK) POINT_COLOR = WHITE;
     else POINT_COLOR = UI_TEXT;
 
     if (id == BTN_OK)
-        LCD_ShowString(x + (BTN_W - label_w) / 2, BTN_Y + 14, label_w, 16, 16, (u8*)btn_label[id]);
+        LCD_ShowString(x + (w - label_w) / 2, BTN_Y + 4, label_w, 24, 24, (u8*)btn_label[id]);
     else
-        Show_Str(x + (BTN_W - label_w) / 2, BTN_Y + 18, (u8*)btn_label[id], 16, 0);
+        Show_Str(x + (w - label_w) / 2, BTN_Y + 8, (u8*)btn_label[id], 16, 0);
 }
 
 void UI_TimingMenu_Draw(void)
@@ -123,12 +128,8 @@ void UI_TimingMenu_Draw(void)
     for (i = 0; i < 4; i++)
         draw_one_item(i);
 
-    for (i = 0; i < 5; i++) {
-        if (i == BTN_CLEAR || i == BTN_STOP)
-            draw_one_btn(i, UI_BTN_GRAY);
-        else
-            draw_one_btn(i, UI_CARD);
-    }
+    for (i = 0; i < 5; i++)
+        draw_one_btn(i, UI_CARD);
 }
 
 void UI_TimingMenu_SetMeasuring(u8 measuring)
@@ -158,7 +159,7 @@ static u8 hit_btn(u16 tx, u16 ty)
     u8 i;
     if (ty < BTN_Y || ty >= BTN_Y + BTN_H) return BTN_NONE;
     for (i = 0; i < 5; i++) {
-        if (tx >= btn_x[i] && tx < btn_x[i] + BTN_W)
+        if (tx >= btn_x[i] && tx < btn_x[i] + btn_w[i])
             return i;
     }
     return BTN_NONE;
@@ -195,15 +196,17 @@ u8 UI_TimingMenu_Scan(void)
     }
 
     btn = hit_btn(tx, ty);
-    if (btn == BTN_CLEAR || btn == BTN_STOP)
-        return TIMING_ACT_NONE;
-
     if (btn != BTN_NONE) {
-        draw_one_btn(btn, UI_BTN_PRESS);
-        delay_ms(80);
+        if (btn == BTN_OK)
+            draw_one_btn(btn, UI_ORANGE);
+        else
+            draw_one_btn(btn, UI_CARD_PRESS);
+        delay_ms(120);
         draw_one_btn(btn, UI_CARD);
 
+        if (btn == BTN_CLEAR) return TIMING_ACT_CLEAR;
         if (btn == BTN_BACK) return TIMING_ACT_BACK;
+        if (btn == BTN_STOP) return TIMING_ACT_STOP;
         if (btn == BTN_SWITCH) return TIMING_ACT_SWITCH;
         if (btn == BTN_OK) return TIMING_ACT_OK;
     }

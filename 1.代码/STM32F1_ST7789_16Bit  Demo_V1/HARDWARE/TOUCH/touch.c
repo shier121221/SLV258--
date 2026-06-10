@@ -4,6 +4,13 @@
 #include "stdlib.h"
 #include "math.h"
 
+#define TP_USE_FIXED_PARAM   1
+#define TP_FIXED_TOUCHTYPE   1
+#define TP_FIXED_XFAC       (-0.09132420f)
+#define TP_FIXED_YFAC       (-0.06561680f)
+#define TP_FIXED_XOFF       349
+#define TP_FIXED_YOFF       257
+
 _m_tp_dev tp_dev=
 {
 	TP_Init,
@@ -544,6 +551,25 @@ u8 TP_Init(void)
    
 		TP_Read_XY(&tp_dev.x[0],&tp_dev.y[0]);//第一次读取初始化
 
+#if TP_USE_FIXED_PARAM
+		tp_dev.xfac = TP_FIXED_XFAC;
+		tp_dev.yfac = TP_FIXED_YFAC;
+		tp_dev.xoff = TP_FIXED_XOFF;
+		tp_dev.yoff = TP_FIXED_YOFF;
+		tp_dev.touchtype = (tp_dev.touchtype & 0X80) | TP_FIXED_TOUCHTYPE;
+		if(tp_dev.touchtype & 0X01)
+		{
+			CMD_RDX = 0X90;
+			CMD_RDY = 0XD0;
+		}
+		else
+		{
+			CMD_RDX = 0XD0;
+			CMD_RDY = 0X90;
+		}
+		return 0;
+#else
+
 		LCD_Clear(WHITE);//清屏
 		if(TP_Get_Adjdata())
 		{
@@ -562,10 +588,16 @@ u8 TP_Init(void)
 		{ 								    			
 			TP_Adjust();  	//屏幕校准 
 			TP_Save_Adjdata();
-		}			
+		}
+#endif
 
 	}
 	return 1; 									 
 }
+
+
+
+
+
 
 

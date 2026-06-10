@@ -10,7 +10,9 @@
 #define TIMING_ITEM_NONE     0xFF
 
 #define TIMING_ACT_NONE      0xFF
+#define TIMING_ACT_CLEAR     0x12
 #define TIMING_ACT_BACK      0x10
+#define TIMING_ACT_STOP      0x13
 #define TIMING_ACT_SWITCH    0x11
 #define TIMING_ACT_OK        0x20
 

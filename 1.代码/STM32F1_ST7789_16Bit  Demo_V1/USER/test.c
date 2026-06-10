@@ -7,6 +7,7 @@
 #include "ui_timing_menu.h"
 
 #define RTP_RAW_TEST 0
+#define RTP_PARAM_TEST 0
 
 // LCD data bus (16-bit parallel):
 // DB0~DB6 = PA0~PA6
@@ -136,6 +137,141 @@ static void rtp_raw_test(void)
     }
 }
 
+static u32 abs_diff_u16(u16 a, u16 b)
+{
+    return (a >= b) ? (u32)(a - b) : (u32)(b - a);
+}
+
+static void lcd_show_signed_num(u16 x, u16 y, s32 num, u8 len, u8 size)
+{
+    if (num < 0) {
+        LCD_ShowChar(x, y, '-', size, 0);
+        LCD_ShowNum(x + size / 2, y, (u32)(-num), len, size);
+    } else {
+        LCD_ShowChar(x, y, '+', size, 0);
+        LCD_ShowNum(x + size / 2, y, (u32)num, len, size);
+    }
+}
+
+static void rtp_draw_target(u16 x, u16 y, u16 color)
+{
+    POINT_COLOR = color;
+    LCD_DrawLine(x - 12, y, x + 12, y);
+    LCD_DrawLine(x, y - 12, x, y + 12);
+    LCD_Draw_Circle(x, y, 6);
+}
+
+static void rtp_param_test(void)
+{
+    static const u16 target_x[4] = {20, 300, 20, 300};
+    static const u16 target_y[4] = {20, 20, 220, 220};
+    u16 sample[4][2] = {0};
+    u16 rx = 0, ry = 0;
+    u8 idx = 0;
+    u8 pressed = 0;
+    u8 got_valid = 0;
+    u8 touchtype;
+    float xfac;
+    float yfac;
+    s16 xoff;
+    s16 yoff;
+    s32 xfac_i;
+    s32 yfac_i;
+
+    rtp_gpio_init();
+    LCD_Clear(WHITE);
+    POINT_COLOR = BLACK;
+    BACK_COLOR = WHITE;
+
+    LCD_ShowString(8, 8, 200, 16, 16, (u8*)"RTP PARAM TEST");
+    LCD_ShowString(8, 28, 240, 16, 16, (u8*)"Tap 4 corners in order");
+    LCD_ShowString(8, 48, 144, 16, 16, (u8*)"1.LT 2.RT 3.LB 4.RB");
+    LCD_ShowString(8, 68, 96, 16, 16, (u8*)"RAWX:");
+    LCD_ShowString(168, 68, 96, 16, 16, (u8*)"RAWY:");
+    rtp_draw_target(target_x[0], target_y[0], RED);
+
+    while (idx < 4) {
+        LCD_Fill(64, 68, 319, 84, WHITE);
+        LCD_ShowNum(64, 68, rx, 4, 16);
+        LCD_ShowNum(224, 68, ry, 4, 16);
+
+        if (TPEN == 0) {
+            if (TP_Read_XY2(&rx, &ry)) {
+                got_valid = 1;
+                pressed = 1;
+                gui_fill_circle(target_x[idx], target_y[idx], 3, BLUE);
+            }
+        } else if (pressed) {
+            pressed = 0;
+            if (got_valid) {
+                sample[idx][0] = rx;
+                sample[idx][1] = ry;
+                gui_fill_circle(target_x[idx], target_y[idx], 4, GREEN);
+                idx++;
+                if (idx < 4) {
+                    rtp_draw_target(target_x[idx], target_y[idx], RED);
+                }
+            }
+            got_valid = 0;
+            delay_ms(150);
+        }
+
+        delay_ms(20);
+    }
+
+    if (abs_diff_u16(sample[1][0], sample[0][0]) >= abs_diff_u16(sample[1][1], sample[0][1])) {
+        touchtype = 0;
+        xfac = (float)(lcddev.width - 40) / (float)((s32)sample[1][0] - (s32)sample[0][0]);
+        xoff = (s16)((lcddev.width - xfac * (sample[1][0] + sample[0][0])) / 2.0f);
+        yfac = (float)(lcddev.height - 40) / (float)((s32)sample[2][1] - (s32)sample[0][1]);
+        yoff = (s16)((lcddev.height - yfac * (sample[2][1] + sample[0][1])) / 2.0f);
+    } else {
+        touchtype = 1;
+        xfac = (float)(lcddev.width - 40) / (float)((s32)sample[1][1] - (s32)sample[0][1]);
+        xoff = (s16)((lcddev.width - xfac * (sample[1][1] + sample[0][1])) / 2.0f);
+        yfac = (float)(lcddev.height - 40) / (float)((s32)sample[2][0] - (s32)sample[0][0]);
+        yoff = (s16)((lcddev.height - yfac * (sample[2][0] + sample[0][0])) / 2.0f);
+    }
+
+    xfac_i = (s32)(xfac * 100000000.0f);
+    yfac_i = (s32)(yfac * 100000000.0f);
+
+    LCD_Clear(WHITE);
+    LCD_ShowString(8, 8, 200, 16, 16, (u8*)"RTP PARAM RESULT");
+    LCD_ShowString(8, 28, 48, 16, 16, (u8*)"X1:");
+    LCD_ShowNum(40, 28, sample[0][0], 4, 16);
+    LCD_ShowString(96, 28, 48, 16, 16, (u8*)"Y1:");
+    LCD_ShowNum(128, 28, sample[0][1], 4, 16);
+    LCD_ShowString(192, 28, 48, 16, 16, (u8*)"X2:");
+    LCD_ShowNum(224, 28, sample[1][0], 4, 16);
+    LCD_ShowString(8, 48, 48, 16, 16, (u8*)"Y2:");
+    LCD_ShowNum(40, 48, sample[1][1], 4, 16);
+    LCD_ShowString(96, 48, 48, 16, 16, (u8*)"X3:");
+    LCD_ShowNum(128, 48, sample[2][0], 4, 16);
+    LCD_ShowString(192, 48, 48, 16, 16, (u8*)"Y3:");
+    LCD_ShowNum(224, 48, sample[2][1], 4, 16);
+    LCD_ShowString(8, 68, 48, 16, 16, (u8*)"X4:");
+    LCD_ShowNum(40, 68, sample[3][0], 4, 16);
+    LCD_ShowString(96, 68, 48, 16, 16, (u8*)"Y4:");
+    LCD_ShowNum(128, 68, sample[3][1], 4, 16);
+
+    LCD_ShowString(8, 100, 96, 16, 16, (u8*)"TYPE:");
+    LCD_ShowNum(56, 100, touchtype, 1, 16);
+    LCD_ShowString(8, 120, 120, 16, 16, (u8*)"XF*1E8:");
+    lcd_show_signed_num(72, 120, xfac_i, 8, 16);
+    LCD_ShowString(8, 140, 120, 16, 16, (u8*)"YF*1E8:");
+    lcd_show_signed_num(72, 140, yfac_i, 8, 16);
+    LCD_ShowString(8, 160, 96, 16, 16, (u8*)"XOFF:");
+    lcd_show_signed_num(56, 160, xoff, 5, 16);
+    LCD_ShowString(8, 180, 96, 16, 16, (u8*)"YOFF:");
+    lcd_show_signed_num(56, 180, yoff, 5, 16);
+    LCD_ShowString(8, 208, 248, 16, 16, (u8*)"Write these params into code");
+
+    while (1) {
+        delay_ms(200);
+    }
+}
+
 
 int main(void)
 {
@@ -152,6 +288,10 @@ int main(void)
 
 #if RTP_RAW_TEST
     rtp_raw_test();
+#endif
+
+#if RTP_PARAM_TEST
+    rtp_param_test();
 #endif
 
     tp_dev.init();
@@ -181,6 +321,10 @@ int main(void)
             if (act == TIMING_ACT_BACK) {
                 page = 0;
                 UI_Main_Draw();
+            } else if (act == TIMING_ACT_CLEAR) {
+                /* TODO: clear current page state */
+            } else if (act == TIMING_ACT_STOP) {
+                /* TODO: stop current timing action */
             } else if (act == TIMING_ACT_OK) {
                 /* TODO: jump to timing operation page, UI_TimingMenu_GetSelected() gives mode. */
             } else if (act == TIMING_ACT_SWITCH) {
