@@ -12,11 +12,15 @@ I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\HARDWARE\TEST\test code.h)(0x642557B0)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\UI\ui_timing_menu.h)(0x6A292D5E)
 I (..\HARDWARE\UI\ui_timing_detail.h)(0x6A2923D4)
 I (..\HARDWARE\UI\ui_mechanics_menu.h)(0x6A29510F)
 I (..\HARDWARE\UI\ui_mechanics_detail.h)(0x6A29514C)
+I (..\HARDWARE\UI\ui_signal_menu.h)(0x6A2954CC)
+I (..\HARDWARE\UI\ui_signal_detail.h)(0x6A2954CD)
+I (..\HARDWARE\UI\ui_settings_menu.h)(0x6A2958B5)
+I (..\HARDWARE\UI\ui_settings_detail.h)(0x6A2958B5)
 F (..\SYSTEM\delay\delay.c)(0x64311481)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\delay.o --omf_browse ..\obj\delay.crf --depend ..\obj\delay.d)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
@@ -98,8 +102,8 @@ I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\HARDWARE\LCD\pic.h)(0x6425409E)
 I (..\HARDWARE\TEST\test code.h)(0x642557B0)
-F (..\HARDWARE\UI\ui_main.c)(0x6A2A2AB6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_main.o --omf_browse ..\obj\ui_main.crf --depend ..\obj\ui_main.d)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+F (..\HARDWARE\UI\ui_main.c)(0x6A2A2DCA)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_main.o --omf_browse ..\obj\ui_main.crf --depend ..\obj\ui_main.d)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
@@ -109,26 +113,26 @@ I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
-F (..\HARDWARE\UI\ui_timing_menu.c)(0x6A2A2297)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_timing_menu.o --omf_browse ..\obj\ui_timing_menu.crf --depend ..\obj\ui_timing_menu.d)
+F (..\HARDWARE\UI\ui_timing_menu.c)(0x6A2A2DD6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_timing_menu_1.o --omf_browse ..\obj\ui_timing_menu_1.crf --depend ..\obj\ui_timing_menu_1.d)
 I (..\HARDWARE\UI\ui_timing_menu.h)(0x6A292D5E)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (..\SYSTEM\sys\system_stm32f10x.h)(0x4F1E2E3C)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
-F (..\HARDWARE\UI\ui_timing_detail.c)(0x6A2A26C2)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_timing_detail.o --omf_browse ..\obj\ui_timing_detail.crf --depend ..\obj\ui_timing_detail.d)
+F (..\HARDWARE\UI\ui_timing_detail.c)(0x6A2A2E81)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_timing_detail_1.o --omf_browse ..\obj\ui_timing_detail_1.crf --depend ..\obj\ui_timing_detail_1.d)
 I (..\HARDWARE\UI\ui_timing_detail.h)(0x6A2923D4)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (..\SYSTEM\sys\system_stm32f10x.h)(0x4F1E2E3C)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\UI\ui_timing_menu.h)(0x6A292D5E)
 I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
@@ -136,26 +140,26 @@ I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
 I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (..\HARDWARE\UI\ui_mechanics_menu.c)(0x6A295142)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_mechanics_menu.o --omf_browse ..\obj\ui_mechanics_menu.crf --depend ..\obj\ui_mechanics_menu.d)
+F (..\HARDWARE\UI\ui_mechanics_menu.c)(0x6A2A2DE2)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_mechanics_menu_1.o --omf_browse ..\obj\ui_mechanics_menu_1.crf --depend ..\obj\ui_mechanics_menu_1.d)
 I (..\HARDWARE\UI\ui_mechanics_menu.h)(0x6A29510F)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (..\SYSTEM\sys\system_stm32f10x.h)(0x4F1E2E3C)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
-F (..\HARDWARE\UI\ui_mechanics_detail.c)(0x6A2951A5)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_mechanics_detail.o --omf_browse ..\obj\ui_mechanics_detail.crf --depend ..\obj\ui_mechanics_detail.d)
+F (..\HARDWARE\UI\ui_mechanics_detail.c)(0x6A2A2E8F)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_mechanics_detail_1.o --omf_browse ..\obj\ui_mechanics_detail_1.crf --depend ..\obj\ui_mechanics_detail_1.d)
 I (..\HARDWARE\UI\ui_mechanics_detail.h)(0x6A29514C)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (..\SYSTEM\sys\system_stm32f10x.h)(0x4F1E2E3C)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\UI\ui_mechanics_menu.h)(0x6A29510F)
 I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
@@ -163,50 +167,50 @@ I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
 I (D:\keil5\ARM\ARMCC\include\stdio.h)(0x60252374)
 I (D:\keil5\ARM\ARMCC\include\string.h)(0x6025237E)
-F (..\HARDWARE\UI\ui_signal_menu.c)(0x6A295766)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_signal_menu.o --omf_browse ..\obj\ui_signal_menu.crf --depend ..\obj\ui_signal_menu.d)
+F (..\HARDWARE\UI\ui_signal_menu.c)(0x6A2A2E11)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_signal_menu_1.o --omf_browse ..\obj\ui_signal_menu_1.crf --depend ..\obj\ui_signal_menu_1.d)
 I (..\HARDWARE\UI\ui_signal_menu.h)(0x6A2954CC)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (..\SYSTEM\sys\system_stm32f10x.h)(0x4F1E2E3C)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
-F (..\HARDWARE\UI\ui_signal_detail.c)(0x6A2954DE)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_signal_detail.o --omf_browse ..\obj\ui_signal_detail.crf --depend ..\obj\ui_signal_detail.d)
+F (..\HARDWARE\UI\ui_signal_detail.c)(0x6A2A2E38)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_signal_detail_1.o --omf_browse ..\obj\ui_signal_detail_1.crf --depend ..\obj\ui_signal_detail_1.d)
 I (..\HARDWARE\UI\ui_signal_detail.h)(0x6A2954CD)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (..\SYSTEM\sys\system_stm32f10x.h)(0x4F1E2E3C)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
-F (..\HARDWARE\UI\ui_settings_menu.c)(0x6A2958B5)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_settings_menu.o --omf_browse ..\obj\ui_settings_menu.crf --depend ..\obj\ui_settings_menu.d)
+F (..\HARDWARE\UI\ui_settings_menu.c)(0x6A2A2E28)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_settings_menu_1.o --omf_browse ..\obj\ui_settings_menu_1.crf --depend ..\obj\ui_settings_menu_1.d)
 I (..\HARDWARE\UI\ui_settings_menu.h)(0x6A2958B5)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (..\SYSTEM\sys\system_stm32f10x.h)(0x4F1E2E3C)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)
 I (..\SYSTEM\delay\delay.h)(0x64311481)
-F (..\HARDWARE\UI\ui_settings_detail.c)(0x6A2958B6)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_settings_detail.o --omf_browse ..\obj\ui_settings_detail.crf --depend ..\obj\ui_settings_detail.d)
+F (..\HARDWARE\UI\ui_settings_detail.c)(0x6A2A2E5E)(-c --cpu Cortex-M3 -g -O0 --apcs=interwork --split_sections -I ..\SYSTEM\delay -I ..\SYSTEM\sys -I ..\SYSTEM\usart -I ..\HARDWARE\LED -I ..\HARDWARE\KEY -I ..\HARDWARE\EXTI -I ..\HARDWARE\WDG -I ..\HARDWARE\TIMER -I ..\HARDWARE\OLED -I ..\HARDWARE\LCD -I ..\USMART -I ..\HARDWARE\RTC -I ..\HARDWARE\WKUP -I ..\HARDWARE\ADC -I ..\HARDWARE\DAC -I ..\HARDWARE\DMA -I ..\HARDWARE\SPI -I ..\HARDWARE\FLASH -I ..\HARDWARE\TOUCH -I ..\HARDWARE\LCD -I ..\HARDWARE\TEST -I ..\HARDWARE\UI-ID:\keil5\Keil\STM32F1xx_DFP\2.3.0\Device\Include-D__UVISION_VERSION="541" -DSTM32F10X_MD -DSTM32F10X_MD-o ..\obj\ui_settings_detail_1.o --omf_browse ..\obj\ui_settings_detail_1.crf --depend ..\obj\ui_settings_detail_1.d)
 I (..\HARDWARE\UI\ui_settings_detail.h)(0x6A2958B5)
 I (..\SYSTEM\sys\sys.h)(0x64311481)
 I (..\SYSTEM\sys\stm32f10x.h)(0x4F1E2E3C)
 I (..\SYSTEM\sys\core_cm3.h)(0x4D523B58)
 I (D:\keil5\ARM\ARMCC\include\stdint.h)(0x6025237E)
 I (..\SYSTEM\sys\system_stm32f10x.h)(0x4F1E2E3C)
-I (..\HARDWARE\UI\ui_main.h)(0x6A2814E5)
+I (..\HARDWARE\UI\ui_main.h)(0x6A2A2D8D)
 I (..\HARDWARE\LCD\lcd.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\touch.h)(0x6A2920F2)
 I (..\HARDWARE\TOUCH\CTP.h)(0x642588F4)

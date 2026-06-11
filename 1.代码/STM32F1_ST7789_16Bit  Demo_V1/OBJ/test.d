@@ -14,3 +14,7 @@
 ..\obj\test.o: ..\HARDWARE\UI\ui_timing_detail.h
 ..\obj\test.o: ..\HARDWARE\UI\ui_mechanics_menu.h
 ..\obj\test.o: ..\HARDWARE\UI\ui_mechanics_detail.h
+..\obj\test.o: ..\HARDWARE\UI\ui_signal_menu.h
+..\obj\test.o: ..\HARDWARE\UI\ui_signal_detail.h
+..\obj\test.o: ..\HARDWARE\UI\ui_settings_menu.h
+..\obj\test.o: ..\HARDWARE\UI\ui_settings_detail.h

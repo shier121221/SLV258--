@@ -1,0 +1,12 @@
+..\obj\ui_signal_detail_1.o: ..\HARDWARE\UI\ui_signal_detail.c
+..\obj\ui_signal_detail_1.o: ..\HARDWARE\UI\ui_signal_detail.h
+..\obj\ui_signal_detail_1.o: ..\SYSTEM\sys\sys.h
+..\obj\ui_signal_detail_1.o: ..\SYSTEM\sys\stm32f10x.h
+..\obj\ui_signal_detail_1.o: ..\SYSTEM\sys\core_cm3.h
+..\obj\ui_signal_detail_1.o: D:\keil5\ARM\ARMCC\Bin\..\include\stdint.h
+..\obj\ui_signal_detail_1.o: ..\SYSTEM\sys\system_stm32f10x.h
+..\obj\ui_signal_detail_1.o: ..\HARDWARE\UI\ui_main.h
+..\obj\ui_signal_detail_1.o: ..\HARDWARE\LCD\lcd.h
+..\obj\ui_signal_detail_1.o: ..\HARDWARE\TOUCH\touch.h
+..\obj\ui_signal_detail_1.o: ..\HARDWARE\TOUCH\CTP.h
+..\obj\ui_signal_detail_1.o: ..\SYSTEM\delay\delay.h

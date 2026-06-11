@@ -102,15 +102,17 @@ static void draw_one_btn(u8 id, u16 bg)
     u16 x = btn_x[id];
     u16 w = btn_w[id];
     u16 label_w = (id == BTN_OK) ? 24 : 32;
+    u16 fill = (id == BTN_OK) ? ((bg == UI_OK_PRESS) ? UI_OK_PRESS : UI_ORANGE) : bg;
+    u8 pressed = (bg == UI_BTN_PRESS) || (bg == UI_OK_PRESS);
 
     if (id == BTN_OK)
-        fill_round_rect(x, BTN_Y, w, BTN_H, BTN_R, UI_ORANGE);
+        fill_round_rect(x, BTN_Y, w, BTN_H, BTN_R, fill);
     else
-        draw_panel(x, BTN_Y, w, BTN_H, BTN_R, bg);
+        draw_panel(x, BTN_Y, w, BTN_H, BTN_R, fill);
 
-    BACK_COLOR = (id == BTN_OK) ? UI_ORANGE : bg;
-    if (id == BTN_CLEAR || id == BTN_STOP) POINT_COLOR = UI_SUBTEXT;
-    else if (id == BTN_OK) POINT_COLOR = WHITE;
+    BACK_COLOR = fill;
+    if (pressed || id == BTN_OK) POINT_COLOR = WHITE;
+    else if (id == BTN_CLEAR || id == BTN_STOP) POINT_COLOR = UI_SUBTEXT;
     else POINT_COLOR = UI_TEXT;
 
     if (id == BTN_OK)
@@ -200,9 +202,9 @@ u8 UI_MechanicsMenu_Scan(void)
     btn = hit_btn(tx, ty);
     if (btn != BTN_NONE) {
         if (btn == BTN_OK)
-            draw_one_btn(btn, UI_ORANGE);
+            draw_one_btn(btn, UI_OK_PRESS);
         else
-            draw_one_btn(btn, UI_CARD_PRESS);
+            draw_one_btn(btn, UI_BTN_PRESS);
         delay_ms(120);
         draw_one_btn(btn, UI_CARD);
 

@@ -13,6 +13,8 @@
 #define UI_RED_TEXT     0xE007  // clear key red #E03030
 #define UI_ORANGE_TEXT  0xF9A0  // OK key orange #FF9800
 #define UI_ORANGE       0xFA20  // orange fill used by main menu
+#define UI_BTN_PRESS    UI_TITLEBAR
+#define UI_OK_PRESS     0xD300  // darker orange for pressed OK key
 #define UI_SHADOW       0xD69A  // soft shadow gray
 
 // Layout constants (320x240 landscape)
