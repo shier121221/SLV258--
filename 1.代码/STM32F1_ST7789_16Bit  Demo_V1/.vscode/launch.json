@@ -1,0 +1,26 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "Debug (JLink)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "jlink",
+            "device": "STM32F103C8",
+            "interface": "swd",
+            "executable": "${workspaceFolder}/build/test.elf",
+            "runToEntryPoint": "main",
+            "svdFile": "${workspaceFolder}/.vscode/STM32F103xx.svd"
+        },
+        {
+            "name": "Debug (OpenOCD)",
+            "type": "cortex-debug",
+            "request": "launch",
+            "servertype": "openocd",
+            "device": "STM32F103C8",
+            "configFiles": ["interface/stlink.cfg", "target/stm32f1x.cfg"],
+            "executable": "${workspaceFolder}/build/test.elf",
+            "runToEntryPoint": "main"
+        }
+    ]
+}

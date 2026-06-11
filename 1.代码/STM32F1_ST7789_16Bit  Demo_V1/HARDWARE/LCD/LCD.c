@@ -65,6 +65,26 @@ void opt_delay(u8 i)
 	while(i--);
 }
 
+static void lcd_data_bus_input(void)
+{
+	// DB0~DB6=PA0~PA6, DB7=PA12, DB8~DB15=PB3~PB10.
+	// Set data pins to floating input before LCD read cycles.
+	GPIOA->CRL = (GPIOA->CRL & 0xF0000000u) | 0x04444444u;
+	GPIOA->CRH = (GPIOA->CRH & 0xFFF0FFFFu) | 0x00040000u;
+	GPIOB->CRL = (GPIOB->CRL & 0x00000FFFu) | 0x44444000u;
+	GPIOB->CRH = (GPIOB->CRH & 0xFFFFF000u) | 0x00000444u;
+}
+
+static void lcd_data_bus_output(void)
+{
+	// Restore only LCD data pins; keep PA7 and touch pins unchanged.
+	GPIOA->CRL = (GPIOA->CRL & 0xF0000000u) | 0x03333333u;
+	GPIOA->CRH = (GPIOA->CRH & 0xFFF0FFFFu) | 0x00030000u;
+	GPIOB->CRL = (GPIOB->CRL & 0x00000FFFu) | 0x33333000u;
+	GPIOB->CRH = (GPIOB->CRH & 0xFFFFF000u) | 0x00000333u;
+	GPIOB->ODR |= 0x07F8u;
+}
+
 //LCD开启显示
 void LCD_DisplayOn(void)
 {
@@ -294,10 +314,7 @@ LCD_WR_REG(0x29);
 u16 LCD_RD_DATA(void)
 {
 	u16 t;
-	// Switch PB3~PB7 to input floating, keep PB0~2 unchanged
-	GPIOB->CRL = (GPIOB->CRL & 0x00000FFFu) | 0x44444000u;
-	// Switch PB8~PB10 to input floating, keep PB11~15 unchanged
-	GPIOB->CRH = (GPIOB->CRH & 0xFFFFF000u) | 0x00000444u;
+	lcd_data_bus_input();
 
 	LCD_RS_SET;
 	LCD_CS_CLR;
@@ -306,11 +323,7 @@ u16 LCD_RD_DATA(void)
 	LCD_RD_SET;
 	LCD_CS_SET;
 
-	// Restore PB3~PB7 output
-	GPIOB->CRL = (GPIOB->CRL & 0x00000FFFu) | 0x33333000u;
-	// Restore PB8~PB10 output
-	GPIOB->CRH = (GPIOB->CRH & 0xFFFFF000u) | 0x00000333u;
-	GPIOB->ODR |= 0x07F8u;
+	lcd_data_bus_output();
 	return t;
 }
 
@@ -336,9 +349,7 @@ u16 LCD_ReadPoint(u16 x,u16 y)
 	LCD_SetCursor(x,y);
 	LCD_WR_REG(0X2E);
 
-	// Switch PB3~PB10 to input floating, protect PB11~15 (touch pins)
-	GPIOB->CRL = (GPIOB->CRL & 0x00000FFFu) | 0x44444000u;
-	GPIOB->CRH = (GPIOB->CRH & 0xFFFFF000u) | 0x00000444u;
+	lcd_data_bus_input();
 
 	LCD_RS_SET;
 	LCD_CS_CLR;
@@ -362,10 +373,7 @@ u16 LCD_ReadPoint(u16 x,u16 y)
 	g<<=8;
 
 	LCD_CS_SET;
-	// Restore PB3~PB10 to output, keep PB11~15 unchanged
-	GPIOB->CRL = (GPIOB->CRL & 0x00000FFFu) | 0x33333000u;
-	GPIOB->CRH = (GPIOB->CRH & 0xFFFFF000u) | 0x00000333u;
-	GPIOB->ODR |= 0x07F8u;
+	lcd_data_bus_output();
 	return (((r>>11)<<11)|((g>>10)<<5)|(b>>11));
 }
 

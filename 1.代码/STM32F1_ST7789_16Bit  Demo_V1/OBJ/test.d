@@ -9,3 +9,8 @@
 ..\obj\test.o: ..\HARDWARE\TOUCH\touch.h
 ..\obj\test.o: ..\HARDWARE\TOUCH\CTP.h
 ..\obj\test.o: ..\HARDWARE\TEST\test code.h
+..\obj\test.o: ..\HARDWARE\UI\ui_main.h
+..\obj\test.o: ..\HARDWARE\UI\ui_timing_menu.h
+..\obj\test.o: ..\HARDWARE\UI\ui_timing_detail.h
+..\obj\test.o: ..\HARDWARE\UI\ui_mechanics_menu.h
+..\obj\test.o: ..\HARDWARE\UI\ui_mechanics_detail.h

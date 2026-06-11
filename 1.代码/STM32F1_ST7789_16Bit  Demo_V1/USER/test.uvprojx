@@ -454,16 +454,51 @@
               <FileType>1</FileType>
               <FilePath>..\HARDWARE\UI\ui_main.c</FilePath>
             </File>
-            <File>
-              <FileName>ui_timing_menu.c</FileName>
-              <FileType>1</FileType>
-              <FilePath>..\HARDWARE\UI\ui_timing_menu.c</FilePath>
-            </File>
           </Files>
         </Group>
         <Group>
           <GroupName>README</GroupName>
           <Files>
+            <File>
+              <FileName>ui_timing_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_timing_menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_timing_detail.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_timing_detail.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_mechanics_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_mechanics_menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_mechanics_detail.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_mechanics_detail.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_signal_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_signal_menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_signal_detail.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_signal_detail.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_settings_menu.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_settings_menu.c</FilePath>
+            </File>
+            <File>
+              <FileName>ui_settings_detail.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\HARDWARE\UI\ui_settings_detail.c</FilePath>
+            </File>
             <File>
               <FileName>README.TXT</FileName>
               <FileType>5</FileType>

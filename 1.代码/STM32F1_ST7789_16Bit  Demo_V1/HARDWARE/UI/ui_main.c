@@ -76,7 +76,7 @@ static void draw_icon_pendulum(u16 x, u16 y, u16 color)
     draw_thick_line(x + 25, y + 7, x + 33, y + 7, 1, color);
     gui_fill_circle(x + 12, y + 26, 6, color);
     gui_fill_circle(x + 24, y + 7, 5, color);
-    gui_fill_circle(x + 24, y + 7, 2, UI_CARD);
+    gui_fill_circle(x + 24, y + 7, 2, BACK_COLOR);
 }
 
 static void draw_icon_wave(u16 x, u16 y, u16 color)
@@ -102,7 +102,7 @@ static void draw_icon_gear(u16 x, u16 y, u16 color)
     draw_thick_line(x + 30, y + 6, x + 24, y + 12, 3, color);
     draw_thick_line(x + 6, y + 30, x + 12, y + 24, 3, color);
     draw_thick_line(x + 30, y + 30, x + 24, y + 24, 3, color);
-    gui_fill_circle(x + 18, y + 18, 7, UI_CARD);
+    gui_fill_circle(x + 18, y + 18, 7, BACK_COLOR);
 }
 
 typedef void (*icon_fn)(u16, u16, u16);
@@ -148,14 +148,17 @@ static void draw_one_card(u8 id, u16 bg)
     u16 x = card_x[id];
     u16 y = card_y[id];
     u16 tx = x + (CARD_W - (u16)card_chars[id] * 16) / 2;
+    u16 fg = (bg == UI_TITLEBAR) ? WHITE : UI_TEXT;
+    u16 icon_color = (bg == UI_TITLEBAR) ? WHITE : UI_TITLEBAR;
 
     draw_panel(x, y, CARD_W, CARD_H, CARD_R, bg);
 
-    POINT_COLOR = UI_TEXT;
+    POINT_COLOR = fg;
     BACK_COLOR = bg;
     Show_Str(tx, y + 8, (u8*)card_title[id], 16, 0);
 
-    icons[id](x + (CARD_W - 45) / 2, y + 28, UI_TITLEBAR);
+    BACK_COLOR = bg;
+    icons[id](x + (CARD_W - 45) / 2, y + 28, icon_color);
 }
 
 static void draw_one_btn(u8 id, u16 bg)
@@ -239,9 +242,8 @@ u8 UI_Main_Scan(void)
 
     card = hit_card(tx, ty);
     if (card != CARD_NONE) {
-        draw_one_card(card, UI_CARD_PRESS);
+        draw_one_card(card, UI_TITLEBAR);
         delay_ms(120);
-        draw_one_card(card, UI_CARD);
         return card;
     }
 

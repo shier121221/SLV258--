@@ -7,7 +7,7 @@
 #define LIST_X       0
 #define LIST_Y       40
 #define LIST_W       320
-#define LIST_H       30
+#define LIST_H       26
 #define LIST_GAP     4
 #define LIST_R       6
 
@@ -27,11 +27,10 @@ static const u16 btn_w[5] = {54, 54, 54, 54, 72};
 static u8 selected_item = TIMING_ITEM_S1;
 static u8 timing_measuring = 0;
 
-static const u8 * const item_label[4] = {
-    (u8*)"\xD5\xDA\xB9\xE2\xBC\xC6\xCA\xB1", /* 遮光计时 */
-    (u8*)"\xBC\xE4\xB8\xF4\xBC\xC6\xCA\xB1", /* 间隔计时 */
-    (u8*)"\xBC\xC6\xCA\xFD\xC4\xA3\xCA\xBD", /* 计数模式 */
-    (u8*)"\xCD\xA8\xD3\xC3\xBC\xC6\xCA\xB1"  /* 通用计时 */
+static const u8 * const item_label[3] = {
+    (u8*)"\xD5\xDA\xB9\xE2\xBC\xC6\xCA\xB1", /* 閬厜璁℃椂 */
+    (u8*)"\xBC\xE4\xB8\xF4\xBC\xC6\xCA\xB1", /* 闂撮殧璁℃椂 */
+    (u8*)"\xBC\xC6\xCA\xFD\xC4\xA3\xCA\xBD"  /* 璁℃暟妯″紡 */
 };
 
 static const u8 * const btn_label[5] = {
@@ -92,7 +91,7 @@ static void draw_one_item(u8 id)
 
     POINT_COLOR = UI_TEXT;
     BACK_COLOR = bg;
-    Show_Str(LABEL_X, y + 7, (u8*)item_label[id], 16, 0);
+    Show_Str(LABEL_X, y + 5, (u8*)item_label[id], 16, 0);
 }
 
 static void draw_one_btn(u8 id, u16 bg)
@@ -125,7 +124,7 @@ void UI_TimingMenu_Draw(void)
     LCD_Fill(0, TIMING_LIST_AREA_Y, 319, TIMING_BTNBAR_Y - 1, UI_BG);
     LCD_Fill(0, TIMING_BTNBAR_Y, 319, 239, UI_BG);
 
-    for (i = 0; i < 4; i++)
+    for (i = 0; i < 3; i++)
         draw_one_item(i);
 
     for (i = 0; i < 5; i++)
@@ -146,7 +145,7 @@ u8 UI_TimingMenu_GetSelected(void)
 static u8 hit_item(u16 tx, u16 ty)
 {
     u8 i;
-    for (i = 0; i < 4; i++) {
+    for (i = 0; i < 3; i++) {
         u16 y = LIST_Y + i * (LIST_H + LIST_GAP);
         if (tx < LIST_W && ty >= y && ty < y + LIST_H)
             return i;

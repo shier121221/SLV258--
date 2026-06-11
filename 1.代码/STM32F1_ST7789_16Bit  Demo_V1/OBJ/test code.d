@@ -11,5 +11,4 @@
 ..\obj\test code.o: ..\HARDWARE\TOUCH\touch.h
 ..\obj\test code.o: ..\HARDWARE\TOUCH\CTP.h
 ..\obj\test code.o: ..\HARDWARE\LCD\pic.h
-..\obj\test code.o: ..\HARDWARE\W25QX\w25qx.h
 ..\obj\test code.o: ..\HARDWARE\TEST\test code.h

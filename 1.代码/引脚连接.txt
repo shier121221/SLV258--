@@ -1,0 +1,19 @@
+//数据总线类型为16位并口
+// DB0-DB6 ==>PA0-PA6
+//DB7   ==>   PA12
+//DB8-BD15  ==> PB3-PB10
+// CS        =       GND  ，直接拉低
+// RS        =        PA8
+// WR        =        PA9
+// RD        =        PA10           读控制信号
+// RST       =        PA11           复位信号
+
+//背光引脚是PC14
+
+
+//芯片：XPT2046，，触摸电路
+//TPEN  = PB15  中断
+//TSDO  = PB14	 数据输出
+//TSDI  = PB13  数据输入
+//TCLK  = PB11  时钟
+//TCS   = PB12	 片选

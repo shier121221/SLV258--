@@ -5,6 +5,13 @@
 #include "test code.h"
 #include "ui_main.h"
 #include "ui_timing_menu.h"
+#include "ui_timing_detail.h"
+#include "ui_mechanics_menu.h"
+#include "ui_mechanics_detail.h"
+#include "ui_signal_menu.h"
+#include "ui_signal_detail.h"
+#include "ui_settings_menu.h"
+#include "ui_settings_detail.h"
 
 #define RTP_RAW_TEST 0
 #define RTP_PARAM_TEST 0
@@ -309,9 +316,23 @@ int main(void)
                 UI_TimingMenu_SetMeasuring(0);
                 UI_TimingMenu_Draw();
             }
-            else if (act == CARD_MECHANIC) { /* TODO: mechanics screen   */ }
-            else if (act == CARD_SIGNAL)   { /* TODO: signal screen      */ }
-            else if (act == CARD_SETTINGS) { /* TODO: settings screen    */ }
+            else if (act == CARD_MECHANIC) {
+                page = 3;
+                wait_touch_release();
+                UI_MechanicsMenu_SetMeasuring(0);
+                UI_MechanicsMenu_Draw();
+            }
+            else if (act == CARD_SIGNAL) {
+                page = 5;
+                wait_touch_release();
+                UI_SignalMenu_SetOutput(0);
+                UI_SignalMenu_Draw();
+            }
+            else if (act == CARD_SETTINGS) {
+                page = 7;
+                wait_touch_release();
+                UI_SettingsMenu_Draw();
+            }
             else if ((act & 0xF0) == 0x10) {
                 u8 btn = act & 0x0F;
                 if (btn == BTN_SWITCH) { /* TODO: switch display mode    */ }
@@ -326,9 +347,69 @@ int main(void)
             } else if (act == TIMING_ACT_STOP) {
                 /* TODO: stop current timing action */
             } else if (act == TIMING_ACT_OK) {
-                /* TODO: jump to timing operation page, UI_TimingMenu_GetSelected() gives mode. */
+                page = 2;
+                wait_touch_release();
+                UI_TimingDetail_Open(UI_TimingMenu_GetSelected());
             } else if (act == TIMING_ACT_SWITCH) {
                 /* TODO: switch display mode */
+            }
+        } else if (page == 2) {
+            u8 act = UI_TimingDetail_Scan();
+            if (act == TIMING_DETAIL_ACT_BACK) {
+                page = 1;
+                wait_touch_release();
+                UI_TimingMenu_Draw();
+            }
+        } else if (page == 3) {
+            u8 act = UI_MechanicsMenu_Scan();
+            if (act == MECH_ACT_BACK) {
+                page = 0;
+                UI_Main_Draw();
+            } else if (act == MECH_ACT_OK) {
+                page = 4;
+                wait_touch_release();
+                UI_MechanicsDetail_Open(UI_MechanicsMenu_GetSelected());
+            }
+        } else if (page == 4) {
+            u8 act = UI_MechanicsDetail_Scan();
+            if (act == MECH_DETAIL_ACT_BACK) {
+                page = 3;
+                wait_touch_release();
+                UI_MechanicsMenu_Draw();
+            }
+        } else if (page == 5) {
+            u8 act = UI_SignalMenu_Scan();
+            if (act == SIGNAL_ACT_BACK) {
+                page = 0;
+                UI_Main_Draw();
+            } else if (act == SIGNAL_ACT_OK) {
+                page = 6;
+                wait_touch_release();
+                UI_SignalDetail_Open();
+            }
+        } else if (page == 6) {
+            u8 act = UI_SignalDetail_Scan();
+            if (act == SIGNAL_DETAIL_ACT_BACK) {
+                page = 5;
+                wait_touch_release();
+                UI_SignalMenu_Draw();
+            }
+        } else if (page == 7) {
+            u8 act = UI_SettingsMenu_Scan();
+            if (act == SETTINGS_ACT_BACK) {
+                page = 0;
+                UI_Main_Draw();
+            } else if (act == SETTINGS_ACT_OK) {
+                page = 8;
+                wait_touch_release();
+                UI_SettingsDetail_Open();
+            }
+        } else if (page == 8) {
+            u8 act = UI_SettingsDetail_Scan();
+            if (act == SETTINGS_DETAIL_ACT_BACK) {
+                page = 7;
+                wait_touch_release();
+                UI_SettingsMenu_Draw();
             }
         }
     }

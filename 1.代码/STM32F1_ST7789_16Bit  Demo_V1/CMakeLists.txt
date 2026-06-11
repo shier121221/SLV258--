@@ -37,6 +37,13 @@ set(SOURCES
     "HARDWARE/TEST/test code.c"
     HARDWARE/UI/ui_main.c
     HARDWARE/UI/ui_timing_menu.c
+    HARDWARE/UI/ui_timing_detail.c
+    HARDWARE/UI/ui_mechanics_menu.c
+    HARDWARE/UI/ui_mechanics_detail.c
+    HARDWARE/UI/ui_signal_menu.c
+    HARDWARE/UI/ui_signal_detail.c
+    HARDWARE/UI/ui_settings_menu.c
+    HARDWARE/UI/ui_settings_detail.c
 )
 
 add_executable(${PROJECT_NAME}.elf ${SOURCES})

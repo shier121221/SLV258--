@@ -6,7 +6,6 @@
 #define TIMING_ITEM_S1       0
 #define TIMING_ITEM_S2       1
 #define TIMING_ITEM_COUNT    2
-#define TIMING_ITEM_GENERAL  3
 #define TIMING_ITEM_NONE     0xFF
 
 #define TIMING_ACT_NONE      0xFF

@@ -7,9 +7,17 @@
 "..\obj\lcd.o"
 "..\obj\ctp.o"
 "..\obj\ctiic.o"
-"..\obj\w25qx.o"
 "..\obj\touch.o"
 "..\obj\test code.o"
+"..\obj\ui_main.o"
+"..\obj\ui_timing_menu.o"
+"..\obj\ui_timing_detail.o"
+"..\obj\ui_mechanics_menu.o"
+"..\obj\ui_mechanics_detail.o"
+"..\obj\ui_signal_menu.o"
+"..\obj\ui_signal_detail.o"
+"..\obj\ui_settings_menu.o"
+"..\obj\ui_settings_detail.o"
 --strict --scatter "..\OBJ\test.sct"
 --summary_stderr --info summarysizes --map --load_addr_map_info --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
