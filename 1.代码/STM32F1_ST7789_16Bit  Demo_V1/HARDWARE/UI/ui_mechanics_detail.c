@@ -25,6 +25,8 @@
 #define POPUP_H           124
 #define POPUP_ITEM_W      88
 #define POPUP_ITEM_H      28
+#define PEND_CTRL_W       64
+#define PEND_CTRL_H       28
 
 #define VIEW_MAX          8
 
@@ -41,6 +43,7 @@ typedef struct
     u8 popup_choice;
     u8 width_choice;
     u8 angle_choice;
+    u8 period_count;
 } mechanics_detail_state_t;
 
 static mechanics_detail_state_t g_mech;
@@ -49,6 +52,7 @@ static const u16 btn_x[5] = {4, 64, 124, 184, 244};
 static const u16 btn_w[5] = {54, 54, 54, 54, 72};
 static const u16 popup_x[4] = {60, 172, 60, 172};
 static const u16 popup_y[4] = {92, 92, 128, 128};
+static const u8 pend_quick_value[6] = {10, 20, 30, 50, 64, 100};
 
 static const u8 * const btn_label[5] = {
     (u8*)"\xC7\xE5\xC1\xE3",
@@ -81,12 +85,17 @@ static const u8 * const info_label[5] = {
 
 static const u8 * const popup_title_width = (u8*)"\xB5\xB2\xC6\xAC\xD1\xA1\xD4\xF1";
 static const u8 * const popup_title_angle = (u8*)"\xBD\xC7\xB6\xC8\xD1\xA1\xD4\xF1";
+static const u8 * const popup_title_period = (u8*)"\xD6\xDC\xC6\xDA\xB4\xCE\xCA\xFD";
+static const u8 * const pendulum_count_label = (u8*)"\xBC\xC6\xCA\xFD";
+static const u8 * const pendulum_period_label = (u8*)"\xD6\xDC\xC6\xDA";
+static const u8 * const period_switch_label = (u8*)"\xC7\xD0\xBB\xBB";
 static const u8 * const footer_label_times = (u8*)"\xB4\xCE\xCA\xFD";
 
 static const char * const width_text[4] = {"1cm", "3cm", "5cm", "10cm"};
-static const char * const angle_text[2] = {"180deg", "360deg"};
+static const char * const angle_text[2] = {"180", "360"};
+static char pendulum_value_buf[24];
 
-static const char * const pendulum_view[3] = {"T = 0.00 ms", "f = 0.00 Hz", "SUM = 0.00 ms"};
+//static const char * const pendulum_view[3] = {"T = 0.00 ms", "f = 0.00 Hz", "SUM = 0.00 ms"};
 static const char * const collision_view[8] = {
     "T11 = 0.00 ms", "T12 = 0.00 ms", "T21 = 0.00 ms", "T22 = 0.00 ms",
     "V11 = 0.00 cm/s", "V12 = 0.00 cm/s", "V21 = 0.00 cm/s", "V22 = 0.00 cm/s"
@@ -137,7 +146,15 @@ static void draw_gb_center(u16 y, const u8 *text, u16 color)
 
 static const char *current_value_text(void)
 {
-    if (g_mech.mode == MECH_ITEM_PENDULUM) return pendulum_view[g_mech.view % 3];
+    if (g_mech.mode == MECH_ITEM_PENDULUM) {
+        if (g_mech.view == 0)
+            snprintf(pendulum_value_buf, sizeof(pendulum_value_buf), "%u: 0.00 ms", (unsigned)g_mech.period_count);
+        else if (g_mech.view == 1)
+            strcpy(pendulum_value_buf, "0.00 Hz");
+        else
+            strcpy(pendulum_value_buf, "0.00 ms");
+        return pendulum_value_buf;
+    }
     if (g_mech.mode == MECH_ITEM_COLLISION) return collision_view[g_mech.view % 8];
     if (g_mech.mode == MECH_ITEM_GRAVITY) return gravity_view[g_mech.view % 3];
     if (g_mech.mode == MECH_ITEM_LINEAR) return linear_view[g_mech.view % 6];
@@ -160,7 +177,20 @@ static void draw_titlebar(void)
 static void draw_value_area(void)
 {
     LCD_Fill(0, VALUE_Y, 319, VALUE_Y + 28, WHITE);
-    draw_ascii_center(VALUE_Y, 24, current_value_text(), UI_TEXT);
+    if (g_mech.mode == MECH_ITEM_PENDULUM && g_mech.view == 0) {
+        LCD_Fill(0, 82, 319, 150, WHITE);
+        BACK_COLOR = WHITE;
+        POINT_COLOR = UI_TEXT;
+        Show_Str(72, 86, (u8*)pendulum_count_label, 16, 0);
+        LCD_ShowChar(104, 86, ':', 16, 0);
+        LCD_ShowString(122, 82, 36, 24, 24, (u8*)"0");
+
+        Show_Str(72, 122, (u8*)pendulum_period_label, 16, 0);
+        LCD_ShowChar(104, 122, ':', 16, 0);
+        LCD_ShowString(122, 118, 112, 24, 24, (u8*)"0.00 S");
+    } else {
+        draw_ascii_center(VALUE_Y, 24, current_value_text(), UI_TEXT);
+    }
 }
 
 static void draw_footer(void)
@@ -183,8 +213,21 @@ static void draw_footer(void)
 
 static void draw_body(void)
 {
+    char period_buf[8];
+    u16 title_x;
+
     LCD_Fill(0, BODY_TOP, 319, BODY_BOTTOM, WHITE);
-    draw_gb_center(INFO_Y, info_label[g_mech.mode], UI_SUBTEXT);
+    if (g_mech.mode == MECH_ITEM_PENDULUM) {
+        snprintf(period_buf, sizeof(period_buf), "(%u)", (unsigned)g_mech.period_count);
+        title_x = (u16)((320 - 64 - (u16)strlen(period_buf) * 8) / 2);
+        BACK_COLOR = WHITE;
+        POINT_COLOR = UI_SUBTEXT;
+        Show_Str(title_x, INFO_Y, (u8*)info_label[g_mech.mode], 16, 0);
+        LCD_ShowString(title_x + 64, INFO_Y, 48, 16, 16, (u8*)period_buf);
+    } else {
+        draw_gb_center(INFO_Y, info_label[g_mech.mode], UI_SUBTEXT);
+    }
+
     if (g_mech.mode == MECH_ITEM_ANGULAR) {
         draw_ascii_center(INFO_Y + 20, 16, angle_text[g_mech.angle_choice], UI_SUBTEXT);
     } else if (g_mech.mode == MECH_ITEM_COLLISION || g_mech.mode == MECH_ITEM_LINEAR) {
@@ -230,8 +273,40 @@ static void draw_button_bar(void)
 static void draw_popup(void)
 {
     u8 i;
-    u8 count = (g_mech.popup_kind == MECH_ITEM_ANGULAR) ? 2 : 4;
-    const u8 *title = (g_mech.popup_kind == MECH_ITEM_ANGULAR) ? popup_title_angle : popup_title_width;
+    u8 count;
+    const u8 *title;
+    char label[8];
+
+    if (g_mech.popup_kind == MECH_ITEM_PENDULUM) {
+        draw_panel(POPUP_X, POPUP_Y, POPUP_W, POPUP_H, 8, UI_CARD);
+        BACK_COLOR = UI_CARD;
+        POINT_COLOR = UI_TEXT;
+        Show_Str(128, POPUP_Y + 10, (u8*)popup_title_period, 16, 0);
+
+        snprintf(label, sizeof(label), "%03u", (unsigned)g_mech.period_count);
+        BACK_COLOR = UI_CARD;
+        POINT_COLOR = UI_TITLEBAR;
+        LCD_ShowString(142, POPUP_Y + 50, 36, 24, 24, (u8*)label);
+
+        fill_round_rect(56, POPUP_Y + 48, PEND_CTRL_W, PEND_CTRL_H, 6, UI_CARD_PRESS);
+        BACK_COLOR = UI_CARD_PRESS;
+        POINT_COLOR = UI_TEXT;
+        LCD_ShowString(84, POPUP_Y + 54, 8, 16, 16, (u8*)"-");
+
+        fill_round_rect(200, POPUP_Y + 48, PEND_CTRL_W, PEND_CTRL_H, 6, UI_CARD_PRESS);
+        BACK_COLOR = UI_CARD_PRESS;
+        POINT_COLOR = UI_TEXT;
+        LCD_ShowString(228, POPUP_Y + 54, 8, 16, 16, (u8*)"+");
+
+        BACK_COLOR = UI_CARD;
+        POINT_COLOR = UI_SUBTEXT;
+        Show_Str(62, POPUP_Y + 92, (u8*)period_switch_label, 16, 0);
+        LCD_ShowString(96, POPUP_Y + 92, 160, 16, 16, (u8*)":10/20/30/50/64/100");
+        return;
+    }
+
+    count = (g_mech.popup_kind == MECH_ITEM_ANGULAR) ? 2 : 4;
+    title = (g_mech.popup_kind == MECH_ITEM_ANGULAR) ? popup_title_angle : popup_title_width;
 
     draw_panel(POPUP_X, POPUP_Y, POPUP_W, POPUP_H, 8, UI_CARD);
     BACK_COLOR = UI_CARD;
@@ -274,7 +349,19 @@ static u8 hit_btn(u16 tx, u16 ty)
 static u8 hit_popup_option(u16 tx, u16 ty)
 {
     u8 i;
-    u8 count = (g_mech.popup_kind == MECH_ITEM_ANGULAR) ? 2 : 4;
+    u8 count;
+
+    if (g_mech.popup_kind == MECH_ITEM_PENDULUM) {
+        if (tx >= 56 && tx < 56 + PEND_CTRL_W &&
+            ty >= POPUP_Y + 48 && ty < POPUP_Y + 48 + PEND_CTRL_H)
+            return 0xF0;
+        if (tx >= 200 && tx < 200 + PEND_CTRL_W &&
+            ty >= POPUP_Y + 48 && ty < POPUP_Y + 48 + PEND_CTRL_H)
+            return 0xF1;
+        return 0xFF;
+    }
+
+    count = (g_mech.popup_kind == MECH_ITEM_ANGULAR) ? 2 : 4;
 
     for (i = 0; i < count; i++) {
         if (tx >= popup_x[i] && tx < popup_x[i] + POPUP_ITEM_W &&
@@ -295,6 +382,21 @@ static void reset_page(void)
 
 static void switch_view(void)
 {
+    u8 i;
+
+    if (g_mech.popup_active && g_mech.popup_kind == MECH_ITEM_PENDULUM) {
+        for (i = 0; i < 6; i++) {
+            if (g_mech.period_count == pend_quick_value[i]) {
+                g_mech.period_count = pend_quick_value[(i + 1) % 6];
+                draw_popup();
+                return;
+            }
+        }
+        g_mech.period_count = pend_quick_value[0];
+        draw_popup();
+        return;
+    }
+
     g_mech.view = (u8)((g_mech.view + 1) % g_mech.view_count);
     draw_value_area();
 }
@@ -304,7 +406,9 @@ static void confirm_popup(void)
     if (!g_mech.popup_active)
         return;
 
-    if (g_mech.popup_kind == MECH_ITEM_ANGULAR)
+    if (g_mech.popup_kind == MECH_ITEM_PENDULUM) {
+        /* period_count already updated by popup touches */
+    } else if (g_mech.popup_kind == MECH_ITEM_ANGULAR)
         g_mech.angle_choice = g_mech.popup_choice;
     else
         g_mech.width_choice = g_mech.popup_choice;
@@ -320,10 +424,15 @@ void UI_MechanicsDetail_Open(u8 mode)
     g_mech.seq_no = 1;
     g_mech.width_choice = 1;
     g_mech.angle_choice = 0;
+    g_mech.period_count = 10;
     g_mech.popup_choice = 1;
     g_mech.view_count = 3;
 
-    if (mode == MECH_ITEM_COLLISION) {
+    if (mode == MECH_ITEM_PENDULUM) {
+        g_mech.popup_active = 1;
+        g_mech.popup_kind = MECH_ITEM_PENDULUM;
+        g_mech.popup_choice = 0;
+    } else if (mode == MECH_ITEM_COLLISION) {
         g_mech.view_count = 8;
         g_mech.popup_active = 1;
         g_mech.popup_kind = MECH_ITEM_COLLISION;
@@ -365,7 +474,17 @@ u8 UI_MechanicsDetail_Scan(void)
     if (g_mech.popup_active) {
         option = hit_popup_option(tx, ty);
         if (option != 0xFF) {
-            g_mech.popup_choice = option;
+            if (g_mech.popup_kind == MECH_ITEM_PENDULUM) {
+                if (option == 0xF0) {
+                    if (g_mech.period_count > 1)
+                        g_mech.period_count--;
+                } else if (option == 0xF1) {
+                    if (g_mech.period_count < 100)
+                        g_mech.period_count++;
+                }
+            } else {
+                g_mech.popup_choice = option;
+            }
             draw_popup();
             return MECH_DETAIL_ACT_NONE;
         }
@@ -398,7 +517,7 @@ u8 UI_MechanicsDetail_Scan(void)
         return MECH_DETAIL_ACT_NONE;
     }
     if (btn == BTN_SWITCH) {
-        if (!g_mech.popup_active)
+        if (!g_mech.popup_active || g_mech.popup_kind == MECH_ITEM_PENDULUM)
             switch_view();
         return MECH_DETAIL_ACT_NONE;
     }
